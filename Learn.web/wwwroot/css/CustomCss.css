@@ -1,0 +1,177 @@
+﻿.Login_Email {
+    color: white !important;
+    position: relative;
+    background: #ef5662;
+    /*border: 4px solid #c2e1f5;*/
+    width: auto;
+    z-index: 400;
+    text-align: center;
+    font-size: 15px;
+    right: 43px;
+}
+
+    .Login_Email:after, .Login_Email:before {
+        top: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+.field-validation-error:after {
+    /*border-color: rgba(136, 183, 213, 0);*/
+    border-top-color: #ef5662;
+    border-width: 12px;
+    margin-left: -30px;
+}
+
+    .Login_Email:before {
+        /*border-color: rgba(194, 225, 245, 0);
+        border-top-color: #c2e1f5;*/
+        border-width: 36px;
+        margin-left: -36px;
+    }
+.input-validation-error{
+    border-color:red;
+}
+.field-validation-error{
+    color:red;
+    padding:6px;
+}
+.height {
+    height: 30px;
+}
+.sercheCourse{
+    border-radius:7px !important;
+
+}
+.noUi-connect {
+    background: #00c0ef!important
+}
+.time b{
+position:relative !important;
+font-size:21px !important;
+top:4px;
+
+}
+.time{
+    
+    border-radius:8px;
+    width:30%;
+    text-align:center;
+    
+}
+.terms-items .term-col article span > b {
+    background-color: #00c0ef;
+    color:white;
+    border-radius:15px;
+    padding:5px;
+}
+.parent{
+    font-weight:bold !important;
+    font-size:15px !important;
+}
+.lin-height{
+    margin-top:8px;
+    display:block !important;
+}
+.pretty.p-icon .state .icon::before {
+    color: #00c0ef !important;
+    
+}
+.pretty.p-icon input:checked ~ .state .icon {
+    border: 2px solid #00c0ef !important;
+    border-radius: 3.5px !important ;
+ 
+}
+.pagination > .active > a {
+    background-color: #00c0ef !important;
+    border-color: #00c0ef;
+}
+.term-content aside .statistics > a{
+    background-color:#ef5662
+}
+.term-content aside .statistics > a:hover{
+    opacity:.9
+}
+.input-factor {
+    
+    float: right
+}
+.div-discont{
+    width:65%
+}
+.fix-height{
+    height:490px;
+}
+
+.jconfirm .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c{
+    font-size:60px !important;
+}
+.jconfirm .jconfirm-box div.jconfirm-title-c{
+    text-align:center;
+    font-size:30px;
+}
+.jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
+    text-align: center !important;
+    font-size: 20px !important;
+    height:30px !important
+}
+.Login{
+    cursor:pointer;
+}
+.factor {
+    cursor: pointer;
+}
+.dwn {
+    cursor: pointer;
+}
+.jconfirm .jconfirm-white .jconfirm-box .jconfirm-buttons, .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons {
+    text-align: center !important;
+}
+.jconfirm .jconfirm-white .jconfirm-box .jconfirm-buttons, .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons{
+    float:none !important;
+}
+.jconfirm .jconfirm-box .jconfirm-buttons button{
+    width:36%;
+}
+.text_area{
+    border:1px solid red;
+}
+#validation{
+    color:red;
+}
+.reply-button {
+    border: 1px solid #9cee5b;
+    background-color: white;
+    color: #ccc;
+}
+    .reply-button:hover {
+        color: #9cee5b;
+    }
+.load-more {
+    color: #28a745;
+    background-color: rgba(242,242,245,.5);
+    border: none;
+    margin-top: 5px;
+    font-size: 20px;
+    direction: ltr;
+    height: 65px;
+    
+}
+    .load-more:hover {
+        background-color: #f2f2f2;
+        color: #28a745 ;
+    }
+    .load-more > span {
+        font-family: samim-bold
+    }
+.rep {
+    display: inline !important;
+    font-family: samim-bold;
+    padding-right: 6px;
+    
+}

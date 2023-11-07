@@ -1,0 +1,251 @@
+﻿@using Learn.Core.Security
+@using Learn.Core.Services.Interfaces;
+@inject ICourseService _CourseService;
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8" />
+    <!--[if lt IE 9]>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <meta name="description" content="test" />
+    <meta name="keywords" content="test" />
+    <meta http-equiv="content-language" content="fa-IR" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="google" content="notranslate" />
+
+    <link href="/AdminContent/Content/panel.css" rel="stylesheet" />
+    <link href="/AdminContent/Content/font.css" rel="stylesheet" />
+    <link href="/AdminContent/Content/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="~/lib/JDataTable/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/lib/JDataTable/css/CustomizeDatatabale.css" rel="stylesheet" />
+    <link href="~/css/cusomizeadmin.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js" async ></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" async ></script>
+        <![endif]-->
+</head>
+<body class="hold-transition skin-admin sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <a href="/admin" class="logo">
+                <span class="logo-mini">
+                    ادمین سایت
+                </span>
+                <span class="logo-lg">
+                    ادمین سایت
+                </span>
+            </a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">تعویض منو</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul id="topleftnav" class="nav navbar-nav">
+                        <li class="dropdown messages-menu">
+                            <a href="/" target="_blank">
+                                <i class="fa fa-home"></i>
+                            </a>
+                        </li>
+                        <li class="dropdown messages-menu">
+                            <a href="#" target="_blank">
+                                <i class="fa fa-wordpress"></i>
+                                <span class="hidden-xs">وبلاگ</span>
+                            </a>
+                        </li>
+                        <li class="dropdown messages-menu">
+                            <a href="/Admin/Courses/CourseComment">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="hidden-xs">نظرات</span>
+                            </a>
+                        </li>
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs">@User.Identity.Name </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="user-header">
+
+                                    <img src="~/UserAvatar/@User.FindFirst("ImageName").Value" alt="@User.Identity.Name" class="img-circle" />
+                                    <p>
+                                        @User.Identity.Name
+                                        @User.Identity.GetEmail()
+                                        <small>
+                                        </small>
+                                    </p>
+                                </li>
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="/UserPanel" class="btn btn-default btn-flat">حساب کاربری</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="/Logout" class="btn btn-default btn-flat">خروج</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-right image">
+                        <a class="image" data-toggle="modal" href="">
+                            <img src="~/UserAvatar/@User.FindFirst("ImageName").Value" alt="@User.Identity.Name" class="img-circle" />
+                        </a>
+                    </div>
+                    <div class="pull-left info">
+                        <p>@User.Identity.Name</p>
+                        <small>  وضعیت : آنلاین</small>
+                    </div>
+                    <div class="clearfix"></div>
+                    <a class="btn btn-social bg-orange btn-block btn-labeled" data-toggle="modal" href="/">
+                        <i class="fa fa-home"></i>
+                        <span>مشاهده سایت</span>
+                    </a>
+                    <div class="clearfix"></div>
+                    <hr />
+                </div>
+                <ul class="sidebar-menu">
+                    <li>
+                    </li>
+                    <li class="header">بخش کاربری</li>
+                    <li class="treeview">
+                        <a href="/admin">
+                            <i class="fa fa-dashboard"></i> <span>داشبورد</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="/Admin/Courses" id="1">
+                            <i class="fa fa-newspaper-o"></i>
+                            <span>اطلاعات دوره ها</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu" id="2">
+                            <li><a href="/Admin/Courses"><i class="fa fa-plus"></i> تمامی دوره ها </a></li>
+                            <li><a href="/Admin/Courses/CourseComment"><i class="fa fa-check"></i> دیدگاه ها</a></li>
+                            <li><a href="/Admin/CourseGroups/"><i class="fa fa-file-archive-o"></i> دسته بندی ها</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="/Admin/Discount" id="3">
+                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                            <span>کد تخفیف</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu" id="4">
+                            <li><a href="/Admin/Discount"><i class="fa fa-check"></i> تمامی کدهای تخفیف</a></li>
+
+                            <li><a href="/Admin/Discount/CreateDiscount"><i class="fa fa-plus"></i> افزودن کد تخفیف</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="treeview">
+                        <a href="/Admin/Users" id="5">
+                            <i class="fa fa-user"></i> <span>کاربران</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu" id="6">
+                            <li>
+                                <a href="/Admin/Users"><i class="fa fa-users"></i> تمامی کاربران </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Users/CreateUser"><i class="fa fa-user-plus"></i> افزودن کاربر</a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Users/ListDeleteUser"><i class="fa fa-user-times"></i> لیست کاربران حذف شده</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="/Admin/Roles" id="7">
+                            <i class="fa fa-user-secret" aria-hidden="true"></i>
+                            <span>مدیریت نقش ها</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu" id="8">
+                            <li><a href="/Admin/Roles"><i class="fa fa-th-list"></i> تمامی نقش ها</a></li>
+                            <li><a href="/Admin/Roles/CreateRole"><i class="fa fa-plus"></i> افزودن نقش جدید</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="treeview" >
+                        <a href="/Admin/Courses/CourseComment" id="9">
+                            <i class="fa fa-envelope-o"></i><small class="label pull-right bg-red" style="margin-left: 19px;">
+                                @_CourseService.UnreadComments()
+                            </small> <span> نظرات</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu" id="10">
+                            <li>
+                                <a href="/Admin/Courses/CourseComment" >
+                                    <i class="fa fa-user"></i><small class="label pull-right ">
+                                   
+                                    </small> خوانده نشده
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+
+                
+                    <li class="treeview" >
+                        <a href="/UserPanel"  id="11">
+                            <i class="fa fa-gears"></i> <span>تنظیمات</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu"  id="12">
+                            <li>
+                                <a href="/UserPanel"><i class="fa fa-user"></i> ویرایش مشخصات کاربری </a>
+                            </li>
+                            <li>
+                                <a href="/UserPanel/ChangePassword"><i class="fa fa-lock"></i> تغییر کلمه عبور</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+
+            @RenderBody()
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <a href="#">Ali</a> &copy; 2015-2019
+            </div>
+            <div class="pull-left">
+                <ul class="social list-unstyled list-inline" itemscope itemtype="http://schema.org/Organization">
+                    <li><a itemprop="sameAs" target="_blank" href="//www.facebook.com/#" title="# facebook fanpage"><i class="fa fa-facebook"></i><span class="sr-only">صفحه فیسبوک </span></a></li>
+                    <li><a itemprop="sameAs" target="_blank" href="//twitter.com/#"><i class="fa fa-twitter" title="# twitter"></i><span class="sr-only">توئیتر </span></a></li>
+                    <li><a itemprop="sameAs" target="_blank" href="//www.google.com/#" rel="publisher" title="# google plus"><i class="fa fa-google-plus"></i><span class="sr-only">گوگل پلاس </span></a></li>
+                    <li><a itemprop="sameAs" target="_blank" href="//www.linkedin.com/company/#" title="# linkedin page"><i class="fa fa-linkedin"></i><span class="sr-only">لینکداین </span></a></li>
+                    <li><a itemprop="sameAs" target="_blank" href="//instagram.com/ali.mohamadi.7" title="# instagram"><i class="fa fa-instagram"><span class="sr-only">اینستاگرام </span></i></a></li>
+                    <li><a target="_blank" href="#" title="# feed"><i class="fa fa-rss"></i><span class="sr-only">اشتراک فید </span></a></li>
+                    <li class="hidden"><a itemprop="url" href="">علی</a></li>
+                </ul>
+            </div>
+        </footer>
+        <div class="control-sidebar-bg"></div>
+    </div>
+
+
+    <script src="/AdminContent/Scripts/jquery.min.js"></script>
+    <script src="/AdminContent/Scripts/bootstrap.rtl.min.js"></script>
+    <script src="/AdminContent/Scripts/panel.js"></script>
+    <script src="~/lib/JDataTable/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/JDataTable/js/Admin.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/AdminContent/Scripts/sweetalert.min.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

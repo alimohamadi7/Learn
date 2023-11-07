@@ -1,0 +1,49 @@
+﻿
+@using DNTPersianUtils.Core;
+
+@model List<Learn.Core.DTOs.CourseCommentViewModel>
+
+@{
+    Layout = null;
+}
+
+
+            @foreach (var item in Model.Where(p=>p.ParentId==null))
+{
+    <!-- row -->
+    <div class="comment-row">
+        <img src="/UserAvatar/@item.UserAvatar">
+        <div class="left-col" id="parent_@item.CommentId">
+            <h3> @item.UserName </h3>
+            <span>@item.CreateDate</span>
+            <p>
+                @item.Comment
+            </p>
+            <button type='button' onclick='' value='' class='btn reply-button zmdi zmdi-replay'>پاسخ</button>
+        </div>
+    </div>
+    @foreach (var item2 in Model.Where(p => p.ParentId == item.CommentId))
+    {
+        <div class="comment-row">
+            <img src="/UserAvatar/@item2.UserAvatar">
+            <div class="left-col">
+                <h3> @item2.UserName </h3>
+                <span>@item2.CreateDate</span>
+                <p>
+                    @item2.Comment
+                </p>
+            </div>
+        </div>
+    }
+}
+
+@*<nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+
+            @for (int i = 1; i <= Model.Item2; i++)
+            {
+                <li class="page-item"><a class="page-link" onclick="pageComment(@i)">@i</a></li>
+            }
+
+        </ul>
+    </nav>*@

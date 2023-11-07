@@ -1,0 +1,21 @@
+﻿@page "{id}"
+@model Learn.web.Pages.Admin.Roles.DeleteRoleModel
+@{
+    ViewData["Title"] = "لرن فایل| حذف نقش";
+}
+
+<div class="container alert" >
+    <div class="well col-md-11 margin" style="border-radius:8px;text-align:center">
+        <form method="post">
+            <input type="hidden" asp-for="Role.RoleId" />
+            <input type="hidden" asp-for="Role.RoleTitle" />
+            <h2>آیا از حذف نقش "@Model.Role.RoleTitle" مطمئن هستید؟ </h2>
+            <p>
+                <input type="submit" value="حذف کن" class="btn btn-outline btn-danger" />
+                <a asp-page="Index" class="btn btn-outline btn-info">انصراف</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+

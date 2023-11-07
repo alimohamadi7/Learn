@@ -1,0 +1,114 @@
+﻿@page "{id}"
+@model Learn.web.Pages.Admin.Courses.IndexEpisodeModel
+@{
+    ViewData["Title"] = "لرن فایل |بخشهای دوره";
+}
+<style>
+    .dataTables_wrapper .dataTables_filter {
+        display: block;
+    }
+
+    .dataTables_wrapper .dataTables_paginate {
+        display: block;
+    }
+
+    .dataTables_wrapper .dataTables_length {
+        display: block !important;
+    }
+</style>
+
+<div class="container">
+    <section class="content-header form-group col-md-11">
+        <h1>مدیریت بخشهای @ViewData["CourseTitle"]</h1>
+        <div style="height:70px;">
+            @if ((string)ViewData["Message"] == "CreateOk")
+            {
+                <div class="alert well" id="Show" style="text-align:center;position: fixed;z-index: 9000000;width: 80%;">بخش با موفقیت ثبت گردید</div>
+            }
+            @if ((string)ViewData["Message"] == "EditOk")
+            {
+                <div class="alert well" id="Show" style="text-align:center;position: fixed;z-index: 9000000;width: 80%;">اطلاعات بخش با موفقیت ویرایش گردید</div>
+
+            }
+            @if ((string)ViewData["Message"] == "DeleteOk")
+            {
+                <div class="alert well" id="Show" style="text-align:center;position: fixed;z-index: 9000000;width: 80%;">اطلاعات مورد نظر با موفقیت حذف گردید</div>
+
+            }
+        </div>
+    </section>
+   
+        <div class="row col-md-11">
+            <div class="form-horizontal margin">
+                <div class="form-inline ">
+                    <a href="/Admin/Courses/CreateEpisode/@ViewData["CourseId"].ToString()?coursename=@ViewData["CourseTitle"]" class="btn btn-info">افزودن بخش جدید</a>
+                    <a href="/Admin/Courses" class="btn btn-yahoo">بازگشت به لیست دوره ها</a>
+                </div>
+            </div>
+
+
+
+            <table id="example" class="table table-striped table-bordered " cellspacing="1">
+                <thead>
+                    <tr class="headdata">
+                        <th>ردیف</th>
+                        <th>عنوان بخش</th>
+                        <th>زمان</th>
+                        <th>رایگان</th>
+                        <th id="removesoret"> </th>
+                    </tr>
+                </thead>
+                <tbody id="BodyTable">
+                    @foreach (var item in Model.CourseEpisode)
+                    {
+                        int i = 1;
+                        <tr>
+                            <td>@i</td>
+                            <td>@item.EpisodeTitle</td>
+                            <td>@item.EpisodeTime</td>
+                            <td>
+                                @if (item.IsFree)
+                                {
+                                    <span class="text-success">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </span>
+                                }
+                            </td>
+                            <td>
+
+                                <a href="/Admin/Courses/EditEpisode/@item.EpisodeId?coursename=@ViewData["CourseTitle"]" class="btn btn-warning btn-block btn-xs">
+                                    ویرایش
+                                    <i class="glyphicon glyphicon-edit"></i>
+                                </a>
+
+                                <a href="/Admin/Courses/DeleteEpisode/@item.EpisodeId?coursename=@ViewData["CourseTitle"]" class="btn btn-danger btn-block btn-xs">
+                                    حذف
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                        i++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+   
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+   $('#Show').delay(8000).fadeOut('slow');
+
+        })
+
+    </script>
+}

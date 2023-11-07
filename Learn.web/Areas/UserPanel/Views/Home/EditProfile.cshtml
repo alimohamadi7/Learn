@@ -1,0 +1,90 @@
+﻿@model Learn.Core.DTOs.EditProfileViewModel
+@using System.Text.Encodings.Web
+@{
+    ViewData["Title"] = "ویرایش حساب کاربری";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">لرن فایل</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> ویرایش پروفایل </li>
+        </ul>
+    </nav>
+</div>
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <partial name="_SideBar" />
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header class="panel panel-info"><h1> افزودن اطلاعات کاربری </h1></header>
+                        <div class="inner form-layer">
+                            <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+                                <div class="row">
+
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" asp-for="NameUser" placeholder="نام " aria-describedby="username">
+                                        </div>
+                                        <span asp-validation-for="NameUser"></span>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-account-box"></i></span>
+                                            <input type="text" class="form-control" asp-for="LastNameUser" placeholder="نام خانوادگی" aria-describedby="email-address">
+                                        </div>
+                                        <span asp-validation-for="LastNameUser"></span>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-phone"></i></span>
+                                            <input type="text" class="form-control" asp-for="PhoneNumberUser" placeholder="شماره تلفن" aria-describedby="email-address">
+                                        </div>
+                                        <span asp-validation-for="PhoneNumberUser"></span>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-view-web"></i></span>
+                                            <input type="text" class="form-control" asp-for="WebsiteUser" placeholder="وب سایت" aria-describedby="email-address">
+                                        </div>
+                                        <span asp-validation-for="WebsiteUser"></span>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-account-circle"></i></span>
+                                            <textarea maxlength="700" class="form-control" asp-for="BibiographyUser" placeholder="درباره من" aria-describedby="email-address" style="resize: vertical;"></textarea>
+                                        </div>
+                                      <span asp-validation-for="BibiographyUser"></span>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button id="upload"  class="btn btn-success "> ویرایش اطلاعات </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    $("#upload").click(function (e)
+    {
+        var NameUser = $("#NameUser").val(); 
+        var LastNameUser = $("#LastNameUser").val();
+        var PhoneNumberUser = $("#PhoneNumberUser").val();
+        var WebsiteUser = $("#WebsiteUser").val();
+        var BibiographyUser = $("#BibiographyUser").val();
+        if (NameUser.length==0 & LastNameUser.length==0 & PhoneNumberUser.length==0 & WebsiteUser.length==0 & BibiographyUser.length == 0)
+            e.preventDefault();
+    }) 
+    
+        
+    
+</script>

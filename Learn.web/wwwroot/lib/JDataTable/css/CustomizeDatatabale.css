@@ -1,0 +1,23 @@
+﻿.dataTables_wrapper .dataTables_length {
+    display: none !important;
+}
+.dataTables_wrapper .dataTables_filter{
+    display:none;
+}
+.dataTables_wrapper .dataTables_paginate {
+    display: none;
+}
+.dataTables_wrapper .dataTables_info{
+    float:right;
+}
+.headdata {
+    background-color: #597886;
+    color: white;
+}
+table.dataTable thead th, table.dataTable thead td{
+    text-align:center;
+}
+table.dataTable tbody th, table.dataTable tbody td {
+    text-align: center;
+    vertical-align:middle;
+}

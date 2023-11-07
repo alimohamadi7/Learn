@@ -1,0 +1,182 @@
+﻿@page "{id}"
+@model Learn.web.Pages.Admin.Courses.EditCourseModel
+@{
+    ViewData["Title"] = "لرن فایل |ویرایش دوره ";
+}
+
+
+<div class="container">
+    <div class="col-md-12 ">
+        <div class="panel panel-warning panel-CreateCourse">
+            <div class="panel-heading">
+                <h3>  ویرایش اطلاعات دوره </h3>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="col-md-7">
+                        <input type="hidden" asp-for="CourseViewModel.CreateDate" />
+                        <input type="hidden" asp-for="CourseViewModel.CourseId" />
+                        <input type="hidden" asp-for="CourseViewModel.CourseImageName" />
+                        <input type="hidden" asp-for="CourseViewModel.DemoFileName" />
+                        <hr />
+                        <div class="form-group">
+                            <label>عنوان دوره</label>
+                            <input type="text" asp-for="CourseViewModel.CourseTitle" class="form-control">
+                            <span asp-validation-for="CourseViewModel.CourseTitle"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>گروه اصلی</label>
+                            <select class="form-control" required asp-for="CourseViewModel.GroupId" asp-items="Model.CourseViewModel.Groups">
+                                <option value="" disabled hidden>انتخاب کنید</option>
+                            </select>
+                            <span asp-validation-for="CourseViewModel.GroupId"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>گروه فرعی</label>
+                            <select class="form-control" asp-for="CourseViewModel.SubGroup" asp-items="Model.CourseViewModel.SupGroups">
+                                <option value="" disabled hidden>انتخاب کنید</option>
+                            </select>
+                            <span asp-validation-for="CourseViewModel.SubGroup"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>شرح مختصر دوره</label>
+                            <textarea class="form-control" asp-for="CourseViewModel.CourseShortDescription" maxlength="250" style="resize:none;max-height:100px" rows="10"></textarea>
+                            <span asp-validation-for="CourseViewModel.CourseShortDescription"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>شرح دوره</label>
+                            <textarea class="form-control" asp-for="CourseViewModel.CourseDescription" rows="10"></textarea>
+                            <span asp-validation-for="CourseViewModel.CourseDescription"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label> دمو دوره</label>
+                            <div class="pretty p-switch p-fill" style="direction:initial;font-size:18px">
+                                <input type="checkbox" asp-for="CourseViewModel.demoDelete" id="CheckDelete" value="" />
+                                <div class="state">
+                                    <label> حذف دمو </label>
+                                </div>
+                            </div>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <video controls class="embed-responsive-item">
+                                    <source src="~/CourseImage/demoes/@Model.CourseViewModel.DemoFileName" id="video_here" type="video/mp4">
+                                    <source src="movie.ogg" type="video/ogg">
+
+                                </video>
+
+                            </div>
+
+                            <input type="file" asp-for="CourseViewModel.demoUp" value="@Model.CourseViewModel.DemoFileName">
+                            <span asp-validation-for="CourseViewModel.demoUp"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>کلمات کلیدی دوره</label>
+
+                            <input type="text" class="form-control" asp-for="CourseViewModel.Tags">
+
+                            <p class="help-block">کلمات را با - جدا کنید</p>
+                            <span asp-validation-for="CourseViewModel.Tags"></span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 leftpanel-createCourse">
+                        <p></p>
+                        <img id="imgCourse" class="thumbnail createcourseimg" src="~/CourseImage/image/@Model.CourseViewModel.CourseImageName" />
+                        <div class="form-group">
+
+                            <label class="label-Createcourse">انتخاب تصویر</label>
+                            <input type="file" class="input-createcourse" asp-for="CourseViewModel.imgCourseUpEdit" id="imgCourseUp">
+                            <span asp-validation-for="CourseViewModel.imgCourseUpEdit"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>مدرس دوره</label>
+                            <select class="form-control" required asp-for="CourseViewModel.TeacherId" asp-items="Model.CourseViewModel.Teachers">
+                                <option value="" disabled hidden>انتخاب کنید</option>
+                            </select>
+
+                            <span asp-validation-for="CourseViewModel.TeacherId"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>سطح دوره</label>
+                            <select class="form-control" required asp-for="CourseViewModel.LevelId" asp-items="Model.CourseViewModel.Levels">
+                                <option value="" disabled hidden>انتخاب کنید</option>
+                            </select>
+                            <span asp-validation-for="CourseViewModel.LevelId"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>وضعیت دوره</label>
+                            <select class="form-control" required asp-for="CourseViewModel.StatusId" asp-items="Model.CourseViewModel.Stautus">
+                                <option value="" disabled hidden>انتخاب کنید</option>
+                            </select>
+                            <span asp-validation-for="CourseViewModel.StatusId"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>قیمت دوره</label>
+                            <input type="number" asp-for="CourseViewModel.CoursePrice" class="form-control" />
+                            <span asp-validation-for="CourseViewModel.CoursePrice"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="pretty p-switch p-fill" style="direction:initial;font-size:20px">
+                                @if (Model.CourseViewModel.ShowComent == true)
+                                {
+                                    <input type="checkbox" asp-for="CourseViewModel.ShowComent" id="Checkomment" checked value="true" />
+
+                                }
+                                else
+                                {
+                                    <input type="checkbox" asp-for="CourseViewModel.ShowComent" id="Checkomment"  value="false" />
+
+                                }
+                                <div class="state">
+                                    <label>نظرات دوره</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <input type="submit" value="ذخیره اطلاعات" class="btn btn-success btn-block btn-lg" />
+                            <a href="/Admin/Courses" class="btn btn-info btn-block btn-lg">بازگشت به لیست</a>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <link href="~/css/pretty-checkbox.min.css" rel="stylesheet" />
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+    <script src="~/lib/ckeditor/adapters/jquery.js"></script>
+    <script src="~/AdminContent/Scripts/admin script.js"></script>
+    <script>
+        $("#CheckDelete").change(function () {
+            var value = $(this).prop("value");
+            if (value == "") {
+                $(this).prop("value", "true");
+            }
+            if (value == "true") {
+                $(this).prop("value", "");
+            }
+        })
+    </script>
+    <script>
+        $("#Checkomment").change(function () {
+            var value = $(this).prop("value");
+
+            if (value == "false") {
+                $(this).prop("value", "true");
+            }
+            if (value == "true") {
+                $(this).prop("value", "false");
+            }
+        });
+
+    </script>
+}
+

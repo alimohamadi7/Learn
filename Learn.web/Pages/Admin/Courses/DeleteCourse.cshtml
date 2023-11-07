@@ -1,0 +1,38 @@
+﻿@page "{id}"
+@using Learn.Core.Convertors
+@model Learn.web.Pages.Admin.Courses.DeleteCourseModel
+@{
+    ViewData["Title"] = "لرن فایل | حذف دوره";
+}
+
+<h2>حذف دروه</h2>
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            حذف دوره
+        </div>
+        <div class="panel-body">
+            <form method="post">
+                <input type="hidden" asp-for="Course.CourseId" />
+                <input type="hidden" asp-for="Course.CourseImageName" />
+                <input type="hidden" asp-for="Course.DemoFileName" />
+                <dl class="dl-horizontal">
+                    <dt>نام دوره : </dt>
+                    <dd>@Model.Course.CourseTitle</dd>
+                    <dt>قیمت دوره : </dt>
+                    <dd>@Model.Course.CoursePrice</dd>
+                    <dt>تاریخ  : </dt>
+                    <dd>@Model.Course.CreateDate.ToShamsi()</dd>
+                    <dt></dt>
+                    <dd>
+                        <input type="submit" value="حذف" class="btn btn-danger btn-lg" />
+                        <a href="/Admin/Courses" class="btn btn-info btn-lg">انصراف</a>
+                    </dd>
+                </dl>
+            </form>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>

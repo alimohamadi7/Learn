@@ -1,0 +1,42 @@
+﻿@page "{id}"
+@using Learn.Core.Convertors
+@model Learn.web.Pages.Admin.Users.DeleteUserModel
+@{
+    ViewData["Title"] = "لرن فایل|حذف کاربر";
+}
+
+
+    <div class="container alert">
+        <h2>حذف کاربر</h2>
+        <div class="col-md-11">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    حذف کاربر
+                </div>
+                <div class="panel-body">
+                    <form method="post">
+                        <input type="hidden" name="UserId" value="@ViewData["UserId"].ToString()" />
+
+                        <dl class="dl-horizontal">
+                            <dt>نام کاربری : </dt>
+                            <dd>@Model.InformationUserViewModel.UserName</dd>
+                            <dt>ایمیل : </dt>
+                            <dd>@Model.InformationUserViewModel.Email</dd>
+                            <dt>موجودی کیف پول  : </dt>
+                            <dd>@Model.InformationUserViewModel.Wallet</dd>
+                            <dt>تاریخ عضویت : </dt>
+                            <dd>@Model.InformationUserViewModel.RegisterDate.ToShamsi()</dd>
+                            <dt></dt>
+                            <dd>
+                                <input type="submit" value="حذف" class="btn btn-danger" />
+                                <a href="/Admin/users/" class="btn btn-info">انصراف</a>
+
+                            </dd>
+                        </dl>
+                    </form>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+    </div>

@@ -1,0 +1,37 @@
+﻿@page "{id}"
+@model Learn.web.Pages.Admin.Courses.DeleteEpisodeModel
+@{
+    ViewData["Title"] = "لرن فایل|حذف بخش";
+}
+   
+        
+    <div class="container alert">
+        <div class="col-md-11">
+            <h2>حذف بخش </h2>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    حذف بخش دوره @ViewData["CourseTitle"]
+                </div>
+                <div class="panel-body">
+                    <form method="post">
+                        <input type="hidden" asp-for="CourseEpisode.CourseId" />
+                        <input type="hidden" asp-for="CourseEpisode.EpisodeId" />
+                        <input type="hidden" asp-for="CourseEpisode.EpisodeFileName" />
+                        <dl class="dl-horizontal">
+                            <dt>نام بخش : </dt>
+                            <dd>@Model.CourseEpisode.EpisodeTitle</dd>
+                            <dt>زمان بخش : </dt>
+                            <dd>@Model.CourseEpisode.EpisodeTime</dd>
+                            <dd>
+                                <input type="submit" value="حذف" class="btn btn-danger " />
+                                <a href="/Admin/Courses/IndexEpisode/@Model.CourseEpisode.CourseId?coursename=@ViewData["CourseTitle"]" class="btn btn-info ">انصراف</a>
+                            </dd>
+                        </dl>
+                    </form>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+</div>
+

@@ -1,0 +1,102 @@
+﻿@page "{id}"
+@using Learn.Core.Convertors
+@using DNTPersianUtils.Core;
+@model Learn.web.Pages.Admin.Discount.EditDiscountModel
+@{
+    ViewData["Title"] = "لرن فایل|کدتخفیف";
+}
+    
+<div class="container">
+    <div class="col-md-6 col-md-push-3">
+
+        <div class="panel panel-warning panel-CreateCourse">
+            <div class="panel-heading">
+                <h3>ویرایش کد تخفیف  </h3>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-md-10 col-md-push-1">
+                    <div class="row">
+                        <form method="post" enctype="multipart/form-data">
+
+                            <input type="hidden" name="LastDiscountcode" value="@Model.Discount.DiscountCode" />
+                            <input type="hidden" asp-for="Discount.DiscountId" />
+                            <div class="form-group">
+                                <label>کد تخفیف </label>
+                                <input type="text" asp-for="Discount.DiscountCode" class="form-control">
+                                <span asp-validation-for="Discount.DiscountCode"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>درصد کد تخفیف </label>
+                                <input type="number" asp-for="Discount.DiscountPercent" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>تعداد </label>
+                                <input type="number" asp-for="Discount.UsableCount" class="form-control">
+                            </div>
+                            <label>تاریخ شروع </label>
+                            <div class="input-group">
+
+                                <span class="input-group-addon" id="username"><i class="fa fa-calendar"></i></span>
+                                <input id="stDate" name="stDate" value="@Model.Discount.StartDate.ToShortPersianDateTimeString()" placeholder="تاریخ شروع" class="form-control" autocomplete="off" />
+                            </div>
+                            <label>تاریخ پایان </label>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="username"><i class="fa fa-calendar"></i></span>
+                                <input id="edDate" name="edDate" value="@Model.Discount.EndDate.ToShortPersianDateTimeString()" placeholder="تاریخ پایان" class="form-control" autocomplete="off" />
+                            </div>
+                            <input type="submit" value="ویرایش اطلاعات" class="btn btn-warning" />
+                            <a href="/Admin/Discount" class="btn btn-info">بازگشت به لیست</a>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <link href="~/lib/PersianDateTimePicker/jquery-wijmo.css" rel="stylesheet" />
+    <link href="~/lib/PersianDateTimePicker/jquery-ui-datetimepicker.min.css" rel="stylesheet" />
+    <script src="~/lib/PersianDateTimePicker/jquery-1.8.2.min.js"></script>
+    <script src="~/lib/PersianDateTimePicker/jquery-ui-1.9.2.min.js"></script>
+    <script src="~/lib/PersianDateTimePicker/jquery-ui-datetimepicker.min.js"></script>
+    <script>
+        $(function () {
+            $("#stDate").datetimepicker();
+            $("#edDate").datetimepicker()
+
+        });
+        $("#1").click(function (e) {
+            $("#2").slideToggle('slow');
+            $("#4").slideUp('slow');
+            $("#6").slideUp('slow');
+            $("#8").slideUp('slow');
+            e.preventDefault()
+        })
+        $("#3").click(function (e) {
+            $("#4").slideToggle('slow');
+             $("#2").slideUp('slow');
+            $("#6").slideUp('slow');
+            $("#8").slideUp('slow');
+            e.preventDefault()
+        })
+        $("#5").click(function (e) {
+            $("#6").slideToggle('slow');
+              $("#2").slideUp('slow');
+            $("#4").slideUp('slow');
+            $("#8").slideUp('slow');
+            e.preventDefault()
+        })
+        $("#7").click(function (e) {
+            $("#8").slideToggle('slow');
+                $("#2").slideUp('slow');
+            $("#4").slideUp('slow');
+            $("#6").slideUp('slow');
+            e.preventDefault()
+        })
+    </script>
+
+}
+
+

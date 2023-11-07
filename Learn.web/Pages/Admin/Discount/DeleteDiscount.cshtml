@@ -1,0 +1,34 @@
+﻿@page "{id}"
+@model Learn.web.Pages.Admin.Discount.DeleteDiscountModel
+@{
+    ViewData["Title"] = "لرنفایل | کد تخفیف";
+}
+
+<h2>حذف کد تخفیف</h2>
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            حذف کد تخفیف
+        </div>
+        <div class="panel-body">
+            <form method="post">
+                <input type="hidden" asp-for="Discount.DiscountId" />
+               
+                <dl class="dl-horizontal">
+                    <dt>نام کد : </dt>
+                    <dd>@Model.Discount.DiscountCode</dd>
+                    <dt>درصد تخفیف: </dt>
+                    <dd>@Model.Discount.DiscountPercent.ToString("0\\%")</dd>
+                 
+                    <dd>
+                        <input type="submit" value="حذف" class="btn btn-danger btn-lg" />
+                        <a href="/Admin/Discount" class="btn btn-info btn-lg">انصراف</a>
+                    </dd>
+                </dl>
+            </form>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>

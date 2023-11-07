@@ -1,0 +1,141 @@
+﻿@page "{Id}"
+@using Learn.DataLayer.Entities.User
+@model Learn.web.Pages.Admin.Users.EditModel
+@{
+    ViewData["Title"] = "ویرایش کاربر";
+    //List<Role> Roles = ViewData["Roles"] as List<Role>;
+}
+    <link href="~/css/pretty-checkbox.min.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <h1 class="page-header">ویرایش کاربر</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <div class="row">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="EditUserViewModel.UserId" />
+            <input type="hidden" asp-for="EditUserViewModel.AvatarName" />
+            <input type="hidden" asp-for="EditUserViewModel.CurrentEmail" />
+            <input type="hidden" asp-for="EditUserViewModel.CurrentUserName" />
+            <input type="hidden" name="name" value="" />
+            <div class="col-md-7">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        اطلاعات کاربر
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>نام کاربری</label>
+                            <input type="text" asp-for="EditUserViewModel.UserName" class="form-control">
+                            <span asp-validation-for="EditUserViewModel.UserName"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label>ایمیل</label>
+                            <input type="email" asp-for="EditUserViewModel.Email" class="form-control">
+                            <span asp-validation-for="EditUserViewModel.Email"></span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>کلمه عبور</label>
+                            <input type="text" asp-for="EditUserViewModel.Password" class="form-control">
+                            <span asp-validation-for="EditUserViewModel.Password"></span>
+                            <p class="help-block">در صورت وارد کردن کلمه عبور ، کلمه عبور کاربر تغییر خواهد کرد</p>
+
+                        </div>
+                        
+                            
+                            <div class="pretty p-image p-plain"style="direction: ltr;">
+                                
+                                <input type="checkbox" asp-for="EditUserViewModel.IsActive" class="checkbox-inline">
+                                <div class="state">
+                                    <img class="image" src="~/images/002.png" >
+                                    <label>وضعیت</label>
+                                </div>
+                            
+                            <span asp-validation-for="EditUserViewModel.IsActive"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label>نام</label>
+                            <input type="text" asp-for="EditUserViewModel.NameUser" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>نام خانوادگی</label>
+                            <input type="text" asp-for="EditUserViewModel.LastNameUser" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>تلفن</label>
+                            <input type="text" asp-for="EditUserViewModel.PhoneNumberUser" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>وبسایت</label>
+                            <input type="text" asp-for="EditUserViewModel.WebsiteUser" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>درباره</label>
+                            <textarea type="text" asp-for="EditUserViewModel.BibiographyUser" style="resize:vertical" maxlength="700" placeholder="کاراکتر مجاز 700" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>انتخاب نقش کاربر</label>
+                            @foreach (var item in Model.EditUserViewModel.Roles)
+                            {
+                          
+                                <div class="pretty p-image p-plain">
+                                    <input type="checkbox" name="SelectedRoles" @((Model.EditUserViewModel.UserRoles.Any(r => r == item.RoleId) ? "Checked" : "")) value="@item.RoleId">                                    <div class="state">
+                                        <img class="image" src="~/images/001.png" >
+                                        <label>@item.RoleTitle</label>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (ViewData["ErrorSelectedRoles"] != null)
+                            {
+                                <span class="text-danger"> لطفا حداقل یک نقش انتخاب نمایید</span>
+                            }
+
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        تصویر پروفایل
+                    </div>
+                    <!-- /.panel-heading -->
+
+                    <img id="imgAvatar" style="margin:auto; width:300px;height:300px;" class="thumbnail" src="~/UserAvatar/@Model.EditUserViewModel.AvatarName" />
+                    <div class="form-group">
+                        <label>انتخاب تصویر</label>
+                        <input type="file" asp-for="EditUserViewModel.UserAvatar">
+                        <span asp-validation-for="EditUserViewModel.UserAvatar"></span>
+                    </div>
+
+                    <!-- /.panel-body -->
+
+                </div>
+                <a href="/Admin/users" class="btn btn-bitbucket">بازگشت به لیست کاربران</a>
+                <input type="submit" value="ذخیره اطلاعات" class="btn btn-success btn-lg" />
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+@section Scripts
+{
+
+    <script src="~/AdminContent/Scripts/admin script.js"></script>
+}
+
+

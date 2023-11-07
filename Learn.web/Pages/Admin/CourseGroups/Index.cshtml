@@ -1,0 +1,122 @@
+﻿@page
+@model Learn.web.Pages.Admin.CourseGroups.IndexModel
+@{
+    ViewData["Title"] = "لرن فایل |گروه ها";
+}
+   
+<section class="content-header form-group col-md-11">
+    <h1>لیست گروه های سایت</h1>
+    <div style="height:70px;">
+        @if (ViewData["Message"].ToString() != null)
+        {
+            switch (ViewData["Message"].ToString())
+            {
+                case "CreateOk":
+                    {
+                        <div class="alert well" id="Show" style="text-align:center;position: fixed;z-index: 9000000;width: 80%;">گروه جدید با موفقیت ثبت گردید</div>
+                        break;
+                    }
+
+                case "EditOk":
+                    {
+                        <div class="alert well" id="Show" style="text-align:center;position: fixed;z-index: 9000000;width: 80%;">اطلاعات گروه با موفقیت ویرایش گردید</div>
+                        break;
+                    }
+                case "DeleteOk":
+                    {
+                        <div class="alert well" id="Show" style="text-align:center;position: fixed;z-index: 9000000;width: 80%; ">اطلاعات مورد نظر با موفقیت حذف گردید</div>
+
+                        break;
+                    }
+
+            }
+        }
+     
+    </div>
+</section>
+<div class="container">
+    <div class="row col-md-11">
+        <div class="form-horizontal margin">
+            <div class="form-inline ">
+                <a asp-page="CreateGroup" class="btn btn-outline btn-success">افزودن گروه جدید</a>
+
+            </div>
+        </div>
+
+
+
+        <table id="example" class="table table-striped table-bordered " cellspacing="1">
+            <thead>
+                <tr class="headdata">
+                    <th>ردیف</th>
+                    <th>عنوان گروه</th>
+                    <th>زیر گروه ها</th>
+                    <th id="removesoret"> </th>
+                </tr>
+            </thead>
+            <tbody id="BodyTable">
+                @foreach (var group in Model.CourseGroups.Where(g => g.ParentId == null))
+                {
+                    int i = 1;
+                    <tr>
+                        <td>@i</td>
+                        <td>@group.GroupTitle</td>
+                        <td>
+                            @if (group.CourseGroups.Any())
+                            {
+                                <ol style="display:inline-flex;flex-wrap:wrap;">
+                                    @foreach (var sub in group.CourseGroups)
+                                    {
+
+                                    <li style="margin:12px;">
+                                        @sub.GroupTitle     <a href="/Admin/CourseGroups/EditGroup/@sub.GroupId" class="glyphicon glyphicon-edit btn-xs btn-outline-warning" style="color:#ffd800">
+
+                                        </a>
+                                        <a href="/Admin/CourseGroups/DeleteGroup/@sub.GroupId" class="glyphicon glyphicon-trash btn-xs btn-outline-warning" style="color:red">
+
+                                        </a>
+                                    </li>
+
+
+
+                                    }
+                                </ol>
+                            }
+                        </td>
+
+
+                        <td>
+
+                            <a href="/Admin/CourseGroups/CreateGroup/@group.GroupId" class="btn btn-info btn-block btn-xs">
+                                زیرگروه
+                                <i class="glyphicon glyphicon-list"></i>
+                            </a>
+                            <a href="/Admin/CourseGroups/EditGroup/@group.GroupId" class="btn btn-warning btn-block btn-xs">
+                                ویرایش
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <a href="/Admin/CourseGroups/DeleteGroup/@group.GroupId" class="btn btn-danger btn-block btn-xs">
+                                حذف
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                    i++;
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('#Show').delay(8000).fadeOut('slow');
+
+        })
+
+    </script>
+}

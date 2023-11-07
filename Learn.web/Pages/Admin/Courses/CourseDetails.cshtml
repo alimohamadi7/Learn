@@ -1,0 +1,134 @@
+﻿@page
+@using Learn.Core.Convertors
+@using Learn.Core.Services.Interfaces
+@model Learn.web.Pages.Admin.Courses.CourseDetailsModel
+@inject IUserService _userservice
+@inject ICourseService _coursesrvice
+@{
+    ViewData["Title"] = "CourseDetails";
+}
+
+<div class="container">
+    <hr />
+    <div class="col-md-11">
+        <a href="/Admin/Courses" class="btn btn-info">بازگشت به لیست</a>
+        <div class="panel panel-info ">
+            <div class="panel-heading">
+                اطلاعات دوره : @Model.course.CourseTitle
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#home" data-toggle="tab">اطلاعات دوره</a>
+                    </li>
+                    <li class="">
+                        <a href="#profile" data-toggle="tab">مدرس</a>
+                    </li>
+                    <li class="">
+                        <a href="#messages" data-toggle="tab">شرح دوره </a>
+                    </li>
+                    <li class="">
+                        <a href="#settings" data-toggle="tab">بخش های دوره</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content ">
+                    <div class="tab-pane fade active in" id="home">
+                        <h4></h4>
+                        <div class="col-md-6 well">
+                            <dv class="margin">
+                                <div class="">
+                                    نام دوره :  @Model.course.CourseTitle
+                                </div>
+                            </dv>
+                            <dv class="margin">
+                                <div class="">
+                                    تاریخ ایجاد دوره :  @Model.course.CreateDate.ToShamsi()
+                                </div>
+                            </dv>
+                            <dv class="margin">
+                                <div class="">
+
+                                    آخرین به روزرسانی دوره :@Model.course.UpdateDate?.ToShamsi()
+                                </div>
+                            </dv>
+                            <dv class="margin">
+                                <div class="">
+                                    قیمت دوره:@Model.course.CoursePrice تومان
+                                </div>
+                            </dv>
+                            <dv class="margin">
+                                <div class="">
+                                    سطح دوره :@Model.course.CourseLevel.LevelTitle
+                                </div>
+                            </dv>
+                            <dv class="margin">
+                                <div class="">
+                                    گروه های دوره:
+                                    <ul>
+                                        <li>@Model.course.CourseGroup.GroupTitle</li>
+                                        @if (Model.course.SubGroup != null)
+                                        {
+                                            <li>@Model.course.Group.GroupTitle</li>
+
+                                        }
+                                    </ul>
+                                </div>
+                            </dv>
+                            <dv class="margin">
+                                <div class="">
+                                    وضعیت دوره :@Model.course.CourseStatus.StatusTitle
+                                </div>
+                            </dv>
+                        </div>
+
+                        <div class="col-md-6">
+                            دمو دوره :
+                            <div class="embed-responsive embed-responsive-16by9" style="margin-top:30px">
+
+
+                                @if (Model.course.DemoFileName != null)
+                                {
+                                    <video controls class="embed-responsive-item">
+                                        <source src="~/CourseImage/demoes/@Model.course.DemoFileName" id="video_here" type="video/mp4">
+                                        <source src="movie.ogg" type="video/ogg">
+
+                                    </video>
+                                }
+
+                            </div>
+                            <dv class="margin">
+                                <div class="">
+                                    وضعیت دوره :@Model.course.CourseStatus.StatusTitle
+                                </div>
+                            </dv>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile">
+                        <h4>مدرس دوره</h4>
+                        <dv class="margin">
+                            <div class="">
+                                @{
+                                    var Teacher = _userservice.GetUserById(Model.course.TeacherId);
+                                }
+                                @Teacher.Name @Teacher.LastName
+                            </div>
+                        </dv>
+                    </div>
+                    <div class="tab-pane fade" id="messages">
+                        <h4>شرح دوره</h4>
+                        @Html.Raw(Model.course.CourseDescription)
+                    </div>
+                    <div class="tab-pane fade" id="settings">
+                        <h4>Settings Tab</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+</div>

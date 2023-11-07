@@ -1,0 +1,103 @@
+﻿@using Learn.Core.Services.Interfaces
+@using System.Security.Claims
+@using Learn.Core.Security
+@inject IPermissionService  _Permissionservice
+
+<!DOCTYPE html>
+<html class="no-js" dir="rtl" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <title>  لرن فایل|@ViewData["Title"] </title>
+    @RenderSection("MetaTag", false)
+    <partial name="_MetaTags" />
+    <partial name="_Styles" />
+    <script src="/js/jquery.min.js"></script>
+</head>
+<body>
+    <script src="/js/modernizr-custom.js"></script>
+
+    <div class="landing-layer">
+        <div class="container">
+            <nav>
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <ul>
+                            <li>
+                                <a href="/">صفحه اصلی سایت</a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    int userId = Convert.ToInt32(Context.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                                    bool Role = _Permissionservice.GetRoleByUsrname(userId);;
+                                    @if (Role == true)
+                                    {
+                                        <a href="/Admin"> پنل مدیریت سایت </a>
+                             
+                                    }
+                                }
+                                <a href=""> همکاری در فروش </a>
+                                <a href=""> درباره ما </a>
+                                <a href=""> تماس با ما </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="clientarea">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+
+
+                                <div class="loggein ">
+
+
+                                    <i class="zmdi zmdi-account "></i><a href="/UserPanel"> @User.Identity.Name، خوش آمدید </a>
+                                    /
+                                    <a href="/Logout"> خروج </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="signin ">
+                                    <i class="zmdi zmdi-account"></i>
+                                    <a href="/Login"> ورود </a> /
+                                    <a href="/Register"> عضویت </a>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+
+            <header>
+                <a href="" class="logo"></a>
+                <h1> با اساتید مجرب و کارآزموده در خودآموز لرن فایل </h1>
+                <h2> آموزش ببینید ، تجربه کسب کنید و وارد بازار کار شوید </h2>
+                <h3> با کمترین هزینه خودت یاد بگیر </h3>
+            </header>
+            @RenderSection("SearchBox", false)
+        </div>
+    </div>
+
+    <!-- main manu -->
+    @await Component.InvokeAsync("CourseGroupComponent")
+    <!-- /main manu -->
+    <!-- content -->
+    @RenderBody();
+    <!-- /content -->
+    <!-- footer -->
+    <Partial name="_Footer" />
+    <!-- /footer -->
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
+
+
+</body>
+</html>
+
+<script src="~/js/jquery.validate.min.js"></script>
+<script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+@RenderSection("script", false)

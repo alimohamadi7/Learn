@@ -1,0 +1,102 @@
+﻿@page
+@model Learn.web.Pages.Admin.Roles.CreateRoleModel
+@{
+    ViewData["Title"] = "لرن فایل |افزدون نقش ";
+}
+
+    <link href="~/css/pretty-checkbox.min.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-header">افزودن نقش جدید</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="container">
+    <div class="row">
+        <form method="post">
+            <div class="col-md-7">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        نقش
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>عنوان نقش</label>
+                            <input type="text" asp-for="CreateRolesViewModel.RoleTitle" class="form-control">
+                            <span asp-validation-for="CreateRolesViewModel.RoleTitle"></span>
+                        </div>
+                        <input type="submit" value="ذخیره اطلاعات" class="btn btn-success" />
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        دسترسی های نقش
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (var permission in Model.CreateRolesViewModel.permissions.Where(p => p.ParentID == null))
+                            {
+                            <li>
+                                <div class="pretty p-image p-plain">
+                                    <input type="checkbox" name="SelectedPermission" value="@permission.PermissionId" /> 
+                                    <div class="state">
+                                        <img class="image" src="~/images/004.png">
+                                        <label>@permission.PermissionTitle</label>
+                                    </div>
+                                </div>
+
+                                @if (Model.CreateRolesViewModel.permissions.Any(p => p.ParentID == permission.ParentID))
+                                {
+                                    <ul>
+                                        @foreach (var sub in Model.CreateRolesViewModel.permissions.Where(p => p.ParentID == permission.PermissionId))
+                                        {
+                                        <li>
+                                            <div class="pretty p-image p-plain">
+                                                <input type="checkbox" name="SelectedPermission" value="@sub.PermissionId" /> 
+                                                <div class="state">
+                                                    <img class="image" src="~/images/004.png">
+                                                    <label>@sub.PermissionTitle</label>
+                                                </div>
+                                            </div>
+                                            @if (Model.CreateRolesViewModel.permissions.Any(p => p.ParentID == sub.ParentID))
+                                            {
+                                                <ul>
+
+                                                    @foreach (var sub2 in Model.CreateRolesViewModel.permissions.Where(p => p.ParentID == sub.PermissionId))
+                                                    {
+                                                    <li>
+                                                        <div class="pretty p-image p-plain">
+                                                            <input type="checkbox" name="SelectedPermission" value="@sub2.PermissionId" /> 
+                                                            <div class="state">
+                                                                <img class="image" src="~/images/004.png">
+                                                                <label>@sub2.PermissionTitle</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                            }
+                        </ul>
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+

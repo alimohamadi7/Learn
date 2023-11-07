@@ -1,0 +1,261 @@
+﻿@page
+@using DNTPersianUtils.Core;
+@using Learn.Core.Services.Interfaces;
+@model Learn.web.Pages.Admin.Users.DetailsModel
+@inject IUserService _userssevice
+@{
+    ViewData["Title"] = "جزِئیات کاربر";
+    int i = 1;
+    int j = 1;
+
+}
+
+<div class="container">
+    <div class="row">
+        <hr />
+        <div class="col-lg-11">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    @foreach (var item in Model.userforDetails.users)
+                    {
+                        <h4>جزئیات اطلاعات کاربری @item.UserName</h4>
+                    }
+
+                </div>
+                <!-- .panel-heading -->
+                <div class="panel-body">
+                    <div class="panel-group" id="accordion">
+                        @foreach (var item in Model.userforDetails.users)
+                        {
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="collapsed">اطلاعات کاربری</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse " style="height: 0px;">
+                                    <div class="panel-body">
+
+                                        <div class="col-md-5">
+                                            <img src="~/UserAvatar/@item.UserAvatar" alt="" class="img-thumbnail" style="width:400px;height:300px; " />
+                                        </div>
+                                        <div class="col-md-7 well" style="height:300px">
+                                            <dv class="margin">
+                                                <div class="inline ">
+                                                    نام کاربری :  @item.UserName
+                                                </div>
+                                            </dv>
+                                            <div class="margin">
+                                                <div class="inline">
+                                                    ایمیل : @item.Email
+                                                </div>
+                                            </div>
+                                            <div class="margin">
+                                                <div class="inline ">
+                                                    نفش های کاربر :
+
+                                                    @foreach (var role in item.UserRoles)
+                                                    {
+                                                        <ul class="" style="display:inline-flex; padding-right:1px;">
+
+                                                            <li class="glyphicon glyphicon-check">@role.Role.RoleTitle</li>
+
+                                                        </ul>
+                                                    }
+
+                                                </div>
+                                                <div class="margin">
+                                                    <div class="inline ">
+                                                        نام : @item.Name
+
+                                                    </div>
+                                                </div>
+                                                <div class="margin">
+                                                    <div class="inline ">
+                                                        نام خانوادگی : @item.LastName
+
+                                                    </div>
+                                                </div>
+                                                <div class="margin">
+                                                    <div class="inline ">
+                                                        شماره تلفن : @item.PhoneNumber
+
+                                                    </div>
+                                                </div>
+                                                <div class="margin">
+                                                    <div class="inline ">
+                                                        وب سایت : @item.Website
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="margin">
+                                                <div class="inline ">
+                                                    تاریخ ثبت نام در سایت : @item.RegisterDate.ToPersianDateTextify()
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-12 well">
+                                            <span class="well" style="padding:10px">بیوگرافی کاربر :</span>
+                                            <div>
+                                                @item.Bibiography
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">کیف پول کاربر</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <div class="col-md-12 ">
+                                            <table class="table table-bordered table-striped">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>مبلغ</th>
+                                                    <th>تاریخ</th>
+                                                    <th>نوع تراکنش</th>
+                                                    <th>شرح</th>
+                                                </tr>
+
+                                                @foreach (var Item in Model.userforDetails.walletUser)
+                                                {
+
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@Item.Amount.ToString("#,0 تومان")</td>
+                                                        <td>
+                                                            @Item.DateTime.ToPersianDateTextify()
+                                                        </td>
+                                                        <td>
+                                                            @if (Item.Type == 1)
+                                                            {
+                                                                <p class="text-success">واریز به حساب</p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p class="text-danger">برداشت از حساب</p>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            @Item.Description
+                                                        </td>
+
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            </table>
+
+                                        </div>
+                                        <div class="col-md-12 well">موجوی حساب کاربر :@Model.userforDetails.WalletMoney.ToString("###,#") تومان</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">فاکتورهای کاربر</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse " style="height: auto;">
+                                    <div class="panel-body">
+                                        <div class="col-md-12 ">
+                                            <table class="table table-bordered table-striped">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>شماره فاکتور</th>
+                                                    <th>خرید قطعی؟</th>
+                                                    <th>تاریخ</th>
+                                                    <th>مبلغ خرید</th>
+                                                    <th>دوره ها</th>
+                                                </tr>
+
+                                                @foreach (var Item in Model.userforDetails.userorder)
+                                                {
+                                                    <tr>
+                                                        <td>@j</td>
+                                                        <td>@Item.orderId</td>
+                                                        <td>
+                                                            @if (Item.IsFinaly)
+                                                            {
+                                                                <p class="text text-success">بله</p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p class="text text-danger">خیر</p>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            @Item.CreateDate.ToPersianDateTextify()
+                                                        </td>
+                                                        <td>
+                                                            @Item.OrderSum.ToString("#,0")
+                                                        </td>
+                                                        <td>
+                                                            <ol>
+                                                                @foreach (var cu in _userssevice.userOrderCourse(Item.orderId))
+                                                                {
+                                                                    <li>@cu</li>
+                                                                }
+                                                            </ol>
+                                                        </td>
+                                                    </tr>
+                                                    j++;
+                                                }
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFoure">دوره های کاربر</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFoure" class="panel-collapse collapse ">
+                                    <div class="panel-body">
+                                        <div class="col-md-12 ">
+
+                                            <ol style="display: flex;flex-wrap: wrap;">
+
+                                                @foreach (var Item in _userssevice.UserCourse(item.UserId))
+                                                {
+
+                                                    <li style="margin:20px">@Item</li>
+
+
+                                                }
+                                            </ol>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- .panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-info btn-block" href="/Admin/Users">بازگشت به لیست</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+

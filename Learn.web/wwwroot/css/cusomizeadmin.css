@@ -1,0 +1,107 @@
+﻿.widthcustom{
+    width:35% !important;
+}
+.btn-facebook:hover{
+    color:white !important;
+}
+ul {
+    list-style-type: none;
+}
+/*.container{
+    overflow-x:scroll;
+    overflow-y:hidden
+}*/
+/*.content-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden
+}*/
+.widthadmin {
+    width: 70px !important;
+    height: 60px !important;
+}
+.btn-bitbucket:hover{
+    color:white;
+}
+.btn-yahoo:hover{
+    color:white;
+}
+.btn-instagram:hover{
+    color:white
+}
+.btn-dropbox:hover{
+    color:white;    
+}
+.btn-flickr:hover {
+    color: white;
+}
+.btn-github:hover{
+    color:white;
+}
+.btn-google:hover{
+    color:white
+}
+.createcourseimg {
+    width: 350px;
+    border-radius: 72px;
+    margin-top: 61px;
+}
+
+.panel-CreateCourse {
+    margin-top: 30px;
+    width: 96%;
+    background-color: #dde9f8
+}
+.leftpanel-createCourse {
+    margin-right: 39px;
+    margin-top: 9px;
+}
+.label-Createcourse{
+    margin-right:33px;
+}
+.input-createcourse{
+    margin:auto
+}
+#CourseViewModel_CourseDescription {
+    resize:vertical
+}
+
+select:required:invalid {
+    color:#999;
+}
+
+option[value=""][disabled] {
+    display:none;
+}
+
+option {
+    color: black;
+}
+
+
+.bootstrap-tagsinput{
+    width:100% !important;
+    height:40px !important;
+      padding-top:9px !important;  
+      font-size:18px;
+}
+.tag label label-info {
+    padding-top: 9px!important
+}
+#datetimepicker1{
+    direction:initial;
+}
+.text_area {
+    border: 1px solid red;
+}
+#validation_ {
+    color: red;
+}
+.jconfirm .jconfirm-box div.jconfirm-title-c{
+    text-align:center;
+}
+.jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
+    text-align: center;
+}
+.jconfirm .jconfirm-white .jconfirm-box .jconfirm-buttons, .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons {
+    float: none !important;
+}
